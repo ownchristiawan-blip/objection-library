@@ -47,12 +47,20 @@ def connect_client():
         "https://www.googleapis.com/auth/drive"
     ]
 
-    creds = ServiceAccountCredentials.from_json_keyfile_name(
-        "credentials.json",
+    creds_dict = st.secrets["gcp"] # Ambil kredensial dari Streamlit Secrets
+   
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(
+        creds_dict, 
         scope
     )
 
-    return gspread.authorize(creds)
+    # creds = ServiceAccountCredentials.from_json_keyfile_name(
+    #     "credentials.json",
+    #     scope
+    # )
+
+    client = gspread.authorize(creds)
+    return client
 
 
 def get_data_sheet(client):
