@@ -2,6 +2,35 @@
 
 ---
 
+## v1.1.0 — Logging Improvement
+
+### Added
+- Real-time logging: setiap pencarian langsung dikirim ke Google Sheets tanpa perlu manual sync
+
+---
+
+### Changed
+- Logging system diubah dari batch-based (buffer + manual sync) menjadi auto flush setiap search
+- Mengurangi risiko kehilangan data jika user tidak menekan tombol sync
+
+---
+
+### Removed
+- Auto flush berbasis threshold (buffer >= 5) tidak lagi digunakan
+
+---
+
+### Impact
+- Data tracking menjadi real-time dan lebih akurat
+- Jumlah API call meningkat (trade-off dari real-time logging)
+
+---
+
+### Notes
+- Sistem tetap mendukung manual sync untuk refresh data dan cache
+
+---
+
 ## v1.0.0 — Initial Release
 
 ### Features

@@ -13,7 +13,7 @@ from datetime import datetime
 # ======================
 # VERSION
 # ======================
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 # ======================
 # CACHE SETTING
@@ -378,6 +378,9 @@ if submitted and query:
         # 🔥 log ke sheet Log
         add_log(match)
 
+        # auto flush (real time-ish) untuk memastikan log tersimpan meskipun user lupa klik refresh
+        flush_logs(client)
+
         st.subheader(f"📌 Objection: {match}")
         st.write(f"🎯 Tujuan: {item['tujuan']}")
 
@@ -537,13 +540,6 @@ with st.expander("➕ Tambah Objection Baru"):
             st.session_state["clear_form"] = True
 
             st.rerun()  # Refresh halaman untuk update data
-
-
-# =======================
-# AUTO FLUSH LOG BUFFER
-# =======================
-if "log_buffer" in st.session_state and len(st.session_state["log_buffer"]) >= 5:   # Flush log jika buffer sudah mencapai 5 item untuk mencegah kehilangan data
-    flush_logs(client)
 
 
 # ======================
